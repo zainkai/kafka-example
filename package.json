@@ -1,0 +1,21 @@
+{
+  "name": "kafka-example",
+  "version": "0.0.1",
+  "description": "simple kafka example using nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zainkai/kafka-example.git"
+  },
+  "author": "zainkai (Kevin Turkington)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zainkai/kafka-example/issues"
+  },
+  "homepage": "https://github.com/zainkai/kafka-example#readme",
+  "devDependencies": {},
+  "dependencies": {}
+}
