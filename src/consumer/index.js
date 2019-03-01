@@ -1,17 +1,31 @@
-var kafka = require('kafka-node')
-var Consumer = kafka.Consumer
-var client = new kafka.Client("localhost:2181/")
-var consumer = new Consumer(
-    client,
-    [
-      { topic: 'TutorialTopic', partition: 0, offset: 0}
-    ],
-    {
-      fromOffset: true
-    }
-  );
+const kafka = require('kafka-node')
+const {Consumer} = kafka
+const config = require('../../config')
+const client = new kafka.KafkaClient({
+  kafkaHost: config.kafkaHost
+})
+
+const consumerConfig = {
+  payloads: [
+    { topic: config.topic1, partition: 0, offset: 0}
+  ],
+  options: {
+    fromOffset: true
+  }
+}
 
 
-consumer.on('message', function (message) {
-  console.log("received message", message);
-});
+const consumer = new Consumer(client, consumerConfig.payloads, consumerConfig.options)
+
+console.log('starting consumer')
+consumer.on('message', (message) => {
+  console.log("received message", message)
+})
+
+consumer.on('error', (err) => {
+  console.log(err)
+})
+
+consumer.on('offsetOutOfRange', (err) => {
+  console.log(err)
+})

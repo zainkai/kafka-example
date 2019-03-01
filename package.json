@@ -4,7 +4,9 @@
   "description": "simple kafka example using nodejs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-consumer": "node src/consumer",
+    "start-producer": "node src/producer"
   },
   "repository": {
     "type": "git",
@@ -17,5 +19,8 @@
   },
   "homepage": "https://github.com/zainkai/kafka-example#readme",
   "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "kafka-node": "^4.0.2",
+    "uuid": "^3.3.2"
+  }
 }
