@@ -36,7 +36,7 @@ function sendToTopic(message) {
 
 console.log('starting producer')
 producer.on('ready', () => {
-  sendToTopic('dank memes')
+  sendToTopic('super dank memes')
 })
 
 producer.on('error', (err) => {

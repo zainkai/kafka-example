@@ -8,7 +8,7 @@ const client = new kafka.KafkaClient({
 
 const consumerConfig = {
   payloads: [
-    { topic: config.topic1, partition: 0, offset: 2} // offset and partition are important
+    { topic: config.topic1, partition: 0, offset: 0} // offset and partition are important
   ],
   options: {
     fromOffset: true,
