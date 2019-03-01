@@ -38,6 +38,7 @@ const consumer = new Consumer(client, consumerConfig.payloads, consumerConfig.op
 
 console.log('starting consumer')
 consumer.on('message', (data) => {
+  console.log(data) // note data.value is not json de-serialized
   const buf = Buffer.from(data.value, 'binary') // Read string into a buffer.
   const msg = JSON.parse(tutorialTopicSchemaV1.fromBuffer(buf))
   console.log("received message", msg)
