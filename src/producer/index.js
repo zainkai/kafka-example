@@ -1,6 +1,7 @@
 const kafka = require('kafka-node')
 const uuidv4 = require('uuid/v4');
 const config = require('../../config')
+const { tutorialTopicSchemaV1 } = require('./schema')
 const {Producer} = kafka
 const client = new kafka.KafkaClient({
   kafkaHost: config.kafkaHost
@@ -23,7 +24,7 @@ const producer = new Producer(client, producerConfig.options)
 function sendToTopic(message) {
   producer.send([{
     topic: config.topic1,
-    messages: [message],
+    messages: [tutorialTopicSchemaV1.toBuffer({message})],
     key: uuidv4(),
     partition: 0,
     attributes: 0,

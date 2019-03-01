@@ -1,6 +1,7 @@
 const kafka = require('kafka-node')
 const {Consumer} = kafka
 const config = require('../../config')
+const { tutorialTopicSchemaV1 } = require('../producer/schema')
 const client = new kafka.KafkaClient({
   kafkaHost: config.kafkaHost
 })
@@ -8,7 +9,7 @@ const client = new kafka.KafkaClient({
 
 const consumerConfig = {
   payloads: [
-    { topic: config.topic1, partition: 0, offset: 1} // offset and partition are important
+    { topic: config.topic1, partition: 0, offset: 0} // offset and partition are important
   ],
   options: {
     fromOffset: true,
@@ -33,15 +34,13 @@ function getConsumerOffset(topic, partition) {
   })
 }
 
-
-
-
 const consumer = new Consumer(client, consumerConfig.payloads, consumerConfig.options)
 
 console.log('starting consumer')
-consumer.on('message', (message) => {
-  (getConsumerOffset(config.topic1, 0))
-  console.log("received message", message)
+consumer.on('message', (data) => {
+  const buf = Buffer.from(data.value, 'binary') // Read string into a buffer.
+  const msg = JSON.parse(tutorialTopicSchemaV1.fromBuffer(buf))
+  console.log("received message", msg)
 })
 
 consumer.on('error', (err) => {
