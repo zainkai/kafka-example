@@ -5,12 +5,13 @@ const client = new kafka.KafkaClient({
   kafkaHost: config.kafkaHost
 })
 
+
 const consumerConfig = {
   payloads: [
-    { topic: config.topic1, partition: 0, offset: 0}
+    { topic: config.topic1, partition: 0, offset: 2} // offset and partition are important
   ],
   options: {
-    fromOffset: true
+    fromOffset: true,
   }
 }
 
